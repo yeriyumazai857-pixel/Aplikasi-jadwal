@@ -1,0 +1,174 @@
+/* style.css */
+:root {
+    --primary: #4f46e5;
+    --bg: #f8fafc;
+    --text: #1e293b;
+    --card: #ffffff;
+    --success: #10b981;
+    --danger: #ef4444;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 { margin: 0; color: var(--primary); }
+header p { color: #64748b; margin-top: 5px; }
+
+nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+nav a {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    background: #e2e8f0;
+    color: var(--text);
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+nav a.active {
+    background: var(--primary);
+    color: white;
+}
+
+.card {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.activity-item {
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.activity-item.done {
+    opacity: 0.6;
+    border-left: 5px solid var(--success);
+}
+
+.activity-item.done .name {
+    text-decoration: line-through;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.time {
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.name {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.btn-done {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.done .btn-done {
+    background: var(--success);
+    color: white;
+    border-color: var(--success);
+}
+
+.btn-danger {
+    margin-top: 20px;
+    width: 100%;
+    background: none;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background: var(--danger);
+    color: white;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    max-width: 600px; /* Sedikit lebih lebar untuk kenyamanan */
+}
+
+/* Membuat tombol lebih besar agar mudah ditekan jari */
+button, nav a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

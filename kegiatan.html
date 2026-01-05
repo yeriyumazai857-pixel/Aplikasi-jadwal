@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Planner - Daftar Kegiatan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Daftar Kegiatan</h1>
+            <p>Selesaikan tugasmu satu per satu.</p>
+        </header>
+
+        <nav>
+            <a href="index.html">Kelola Jadwal</a>
+            <a href="kegiatan.html" class="active">Daftar Kegiatan</a>
+        </nav>
+
+        <div id="activityList">
+            </div>
+
+        <button onclick="clearAll()" class="btn-danger">Batal Semua / Reset</button>
+    </div>
+
+    <script>
+        function loadActivities() {
+            const list = document.getElementById('activityList');
+            const activities = JSON.parse(localStorage.getItem('activities')) || [];
+            list.innerHTML = '';
+
+            if (activities.length === 0) {
+                list.innerHTML = '<p style="text-align:center; color:#888;">Belum ada jadwal hari ini.</p>';
+                return;
+            }
+
+            activities.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `activity-item ${item.completed ? 'done' : ''}`;
+                card.innerHTML = `
+                    <div class="info">
+                        <span class="time">${item.time}</span>
+                        <span class="name">${item.activity}</span>
+                    </div>
+                    <button onclick="markDone(${item.id})" class="btn-done">
+                        ${item.completed ? 'Selesai' : 'Checklist'}
+                    </button>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function markDone(id) {
+            let activities = JSON.parse(localStorage.getItem('activities'));
+            activities = activities.map(item => {
+                if (item.id === id) item.completed = !item.completed;
+                return item;
+            });
+            localStorage.setItem('activities', JSON.stringify(activities));
+            loadActivities();
+        }
+
+        function clearAll() {
+            if (confirm('Apakah Anda yakin ingin menghapus semua jadwal?')) {
+                localStorage.removeItem('activities');
+                loadActivities();
+            }
+        }
+
+        window.onload = loadActivities;
+    </script>
+</body>
+</html>

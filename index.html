@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <link rel="manifest" href="manifest.json">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#4f46e5">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Planner - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Rencana Hari Ini</h1>
+            <p>Disiplin adalah kunci produktivitas.</p>
+        </header>
+
+        <nav>
+            <a href="index.html" class="active">Kelola Jadwal</a>
+            <a href="kegiatan.html">Daftar Kegiatan</a>
+        </nav>
+
+        <section class="card">
+            <h3>Tambah Kegiatan Baru</h3>
+            <form id="scheduleForm">
+                <div class="input-group">
+                    <label>Waktu</label>
+                    <input type="time" id="time" required>
+                </div>
+                <div class="input-group">
+                    <label>Nama Kegiatan</label>
+                    <input type="text" id="activity" placeholder="Contoh: Olahraga Pagi" required>
+                </div>
+                <button type="submit" class="btn-primary">Simpan Jadwal</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const time = document.getElementById('time').value;
+            const activity = document.getElementById('activity').value;
+
+            const newActivity = {
+                id: Date.now(),
+                time: time,
+                activity: activity,
+                completed: false
+            };
+
+            let activities = JSON.parse(localStorage.getItem('activities')) || [];
+            activities.push(newActivity);
+            // Sortir otomatis berdasarkan waktu
+            activities.sort((a, b) => a.time.localeCompare(b.time));
+            
+            localStorage.setItem('activities', JSON.stringify(activities));
+            alert('Kegiatan berhasil ditambahkan!');
+            this.reset();
+        });
+    </script>
+    <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log("Service Worker Registered"))
+      .catch(err => console.log("Service Worker Failed", err));
+  }
+</script>
+
+</body>
+</html>
